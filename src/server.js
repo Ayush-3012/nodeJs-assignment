@@ -8,6 +8,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT; // PORT defined in env.
 
+// app.get("/", (req, res) => res.json("Hello World"));
+
 // middleware to parse JSON.
 app.use(express.json());
 
@@ -15,7 +17,7 @@ app.use(express.json());
 app.use(logger);
 
 // user route.
-app.use("api/v1/users", userRouter);
+app.use("/api/v1/users", userRouter);
 
 // listening to defined PORT after starting the server.
 app.listen(PORT, () => {

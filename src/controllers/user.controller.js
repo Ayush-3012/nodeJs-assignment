@@ -18,14 +18,19 @@ export const createUser = (req, res) => {
 };
 
 export const updateUser = (req, res) => {
-  const index = users.findIndex((user) => user.id === req.params.id);
-  if (index === -1) 
+  const foundUserIndex = users.findIndex((user) => user.id === req.params.id);
+  if (foundUserIndex === -1)
     return res.status(404).json({ error: "User not found" });
 
-  users[index] = { ...users[index], ...req.body };
+  users[foundUserIndex] = { ...users[foundUserIndex], ...req.body };
   return res.status(200).json({ message: "User updated", user: users[index] });
 };
 
 export const deleteUser = (req, res) => {
-  return res.json();
+  const foundUserIndex = users.findIndex((user) => user.id === req.params.id);
+  if (foundUserIndex === -1)
+    return res.status(404).json({ error: "User not found" });
+
+  users.splice(foundUserIndex, 1);
+  return res.status(204).json({ message: "User deleted" });
 };

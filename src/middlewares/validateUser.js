@@ -1,7 +1,7 @@
 // ValidateUser middleware => middleware/validateUser.js
 const validateUser = (req, res, next) => {
-  const { id, firstName, lastName, hobby } = req.body;
-  if (!id || !firstName || !lastName || !hobby) {
+  const { firstName, lastName, hobby } = req.body;
+  if (!firstName || !lastName || !hobby) {
     return res
       .status(400)
       .json({
