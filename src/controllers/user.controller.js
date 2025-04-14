@@ -5,7 +5,7 @@ export const getAllUsers = (req, res) => {
 };
 
 export const getUserById = (req, res) => {
-  const foundUser = users.find((user) => user.id == req.params.id);
+  const foundUser = users.find((user) => Number(user.id) === Number(req.params.id));
   if (!foundUser) return res.status(404).json({ error: " User Not Found" });
 
   return res.status(200).json(foundUser);
