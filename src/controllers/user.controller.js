@@ -1,4 +1,4 @@
-const users = []; // globar user object to stores users details.
+const users = []; // global user object to stores users details.
 
 export const getAllUsers = (req, res) => {
   return res.status(200).json(users);
@@ -18,16 +18,23 @@ export const createUser = (req, res) => {
 };
 
 export const updateUser = (req, res) => {
-  const foundUserIndex = users.findIndex((user) => user.id === req.params.id);
+  const foundUserIndex = users.findIndex(
+    (user) => Number(user.id) === Number(req.params.id)
+  );
+
   if (foundUserIndex === -1)
     return res.status(404).json({ error: "User not found" });
 
   users[foundUserIndex] = { ...users[foundUserIndex], ...req.body };
-  return res.status(200).json({ message: "User updated", user: users[index] });
+  return res
+    .status(200)
+    .json({ message: "User updated", user: users[foundUserIndex] });
 };
 
 export const deleteUser = (req, res) => {
-  const foundUserIndex = users.findIndex((user) => user.id === req.params.id);
+  const foundUserIndex = users.findIndex(
+    (user) => Number(user.id) === Number(req.params.id)
+  );
   if (foundUserIndex === -1)
     return res.status(404).json({ error: "User not found" });
 
